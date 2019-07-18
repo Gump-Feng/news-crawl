@@ -1,0 +1,4 @@
+logging:
+  config: classpath:log/logback-spring.xml
+
+#mybatis»’÷æ…Ë÷√

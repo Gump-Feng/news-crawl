@@ -7,8 +7,9 @@ import com.ertu.news.model.bean.Site;
 import com.ertu.news.model.bean.SiteBean;
 import com.ertu.news.utils.StringUtils;
 import com.ertu.news.utils.TimeUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
@@ -20,7 +21,7 @@ import java.util.concurrent.BlockingQueue;
  * @date 2019/6/24 18:35
  */
 public class JsonAnalysis implements Analysis {
-    private static Logger logger = Logger.getLogger(JsonAnalysis.class);
+    private static Logger logger = LoggerFactory.getLogger(JsonAnalysis.class);
 
     @Override
     public void analysis(Site site, String siteUrl) {
@@ -30,7 +31,7 @@ public class JsonAnalysis implements Analysis {
         Document xmlDocument = XmlAnalysis.transferDocumentByFileDir(site.getConfigBean().getXmlPath());
         Element crawlJsonExpEle = xmlDocument.getRootElement().element("sites").element("site").element("crawlJsonExps");
         byte[] rssBytes = (byte[]) siteBean.getSeedPage().get(siteUrl).get("content");
-        MDC.put("site_id", siteBean.getSiteId());
+        MDC.put("site_id", siteBean.getSiteId()+"");
         logger.info("开始解析json数据：" + siteBean.getWebsiteColumnNameEn() + "/" + site.getConfigBean().getXmlPath());
         JSONObject jsonObject = (JSONObject) JSONObject.parse(rssBytes);
         if (crawlJsonExpEle != null) {

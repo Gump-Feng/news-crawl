@@ -1,7 +1,7 @@
 package com.ertu.news.download.utils.proxy;
 
-import com.lwlh.model.bean.ProxyBean;
-import com.lwlh.utils.SerializeObjectTool;
+import com.ertu.news.model.bean.ProxyBean;
+import com.ertu.news.utils.SerializeObjectTool;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

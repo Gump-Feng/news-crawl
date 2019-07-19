@@ -1,7 +1,8 @@
 package com.ertu.news.utils;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -10,51 +11,47 @@ import java.util.Map;
 /**
  * @author hxf
  * @date 2019/5/6 16:50
- *
+ * <p>
  * 系统日志写到数据库的工具类
  */
 public class LogUtils {
-    private static Logger logger =Logger.getLogger("SYSTEM");
+    private static Logger logger = LoggerFactory.getLogger("SYSTEM");
 
     /**
      * 消息级别
      */
-    public static void info(int siteId, String message){
-        MDC.put("site_id", siteId);
+    public static void info(int siteId, String message) {
+        MDC.put("site_id", siteId + "");
         logger.info(message);
     }
 
-    public static void debug(int siteId, String message){
-        MDC.put("site_id", siteId);
+    public static void debug(int siteId, String message) {
+        MDC.put("site_id", siteId + "");
         logger.debug(message);
     }
 
-    public static void error(int siteId, String message){
-        MDC.put("site_id", siteId);
+    public static void error(int siteId, String message) {
+        MDC.put("site_id", siteId + "");
         logger.error(message);
     }
 
-    public static void warn(int siteId, String message){
-        MDC.put("site_id", siteId);
+    public static void warn(int siteId, String message) {
+        MDC.put("site_id", siteId + "");
         logger.warn(message);
     }
 
 
-
-
-
-
-    public static Map<String, String> createLogMap(String logInfo, int logLevel, int siteId, Date crawlTime){
+    public static Map<String, String> createLogMap(String logInfo, int logLevel, int siteId, Date crawlTime) {
         Map<String, String> logInfoMap = new HashMap<>(10);
-        logInfoMap.put("site_id",siteId+"");
-        logInfoMap.put("log_info",logInfo);
-        logInfoMap.put("log_level",logLevel+"");
+        logInfoMap.put("site_id", siteId + "");
+        logInfoMap.put("log_info", logInfo);
+        logInfoMap.put("log_level", logLevel + "");
 
-        if (crawlTime == null){
+        if (crawlTime == null) {
             crawlTime = new Date();
         }
         String crawlTimeStr = TimeUtils.dateToString(crawlTime, "yyyy-MM-dd HH:mm:dd");
-        logInfoMap.put("crawl_time",crawlTimeStr);
+        logInfoMap.put("crawl_time", crawlTimeStr);
         return logInfoMap;
     }
 

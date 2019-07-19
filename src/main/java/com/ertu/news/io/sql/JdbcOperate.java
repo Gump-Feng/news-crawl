@@ -2,7 +2,8 @@ package com.ertu.news.io.sql;
 
 import com.ertu.news.utils.PropertyUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.TreeMap;
  * @author hxf
  */
 public class JdbcOperate {
-    private static Logger logger = Logger.getLogger(JdbcOperate.class);
+    private static Logger logger = LoggerFactory.getLogger(JdbcOperate.class);
 
     public static void main(String[] args) {
 
@@ -338,8 +339,10 @@ public class JdbcOperate {
                 Map<String, String> sqlmap = new HashMap<>(16);
 //                获得数据库信息后，转为map
                 for (String sb : sqlDetail) {
-                    String[] ms = sb.split("=");
-                    sqlmap.put(ms[0], ms[1]);
+                    if (sb.contains("=")) {
+                        int index = sb.indexOf("=");
+                        sqlmap.put(sb.substring(0, index), sb.substring(index + 1));
+                    }
                 }
                 String driverClass = sqlmap.get("driverClass");
                 String url = sqlmap.get("url");

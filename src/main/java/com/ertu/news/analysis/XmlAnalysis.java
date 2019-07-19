@@ -6,8 +6,9 @@ import com.ertu.news.model.bean.*;
 import com.ertu.news.utils.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -37,7 +38,7 @@ public class XmlAnalysis implements Analysis {
     public final static String WEBSITE_TABLE_TAG = "website-fields";
     public final static String INFO_TABLE_TAG = "context-fields";
     public final static String FILE_TABLE_TAG = "static-fields";
-    private static Logger logger = Logger.getLogger(XmlAnalysis.class);
+    private static Logger logger = LoggerFactory.getLogger(XmlAnalysis.class);
 
     public static void main(String[] args) {
     }
@@ -908,7 +909,7 @@ public class XmlAnalysis implements Analysis {
                 Site site = new Site();
                 Analysis xmlAnalysis = new XmlAnalysis();
                 xmlAnalysis.analysis(site, configFile.getAbsolutePath());
-                MDC.put("site_id", site.getConfigBean().getSiteBean().getSiteId());
+                MDC.put("site_id", site.getConfigBean().getSiteBean().getSiteId()+"");
                 sourceConfigQueue.add(site);
             } catch (Exception e) {
                 logger.error("配置栏目：" + configFile.getAbsolutePath() + "--时出错\n" + "出错信息为：" + e.getMessage());

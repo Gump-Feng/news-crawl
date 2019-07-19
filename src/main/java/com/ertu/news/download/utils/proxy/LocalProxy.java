@@ -1,6 +1,6 @@
 package com.ertu.news.download.utils.proxy;
 
-import com.lwlh.model.bean.ProxyBean;
+import com.ertu.news.model.bean.ProxyBean;
 import org.apache.http.HttpHost;
 
 /**

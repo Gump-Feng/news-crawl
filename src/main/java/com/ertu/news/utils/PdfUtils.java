@@ -1,7 +1,8 @@
 package com.ertu.news.utils;
 
 import com.itextpdf.text.pdf.PdfReader;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author hxf
@@ -9,7 +10,7 @@ import org.apache.log4j.Logger;
  */
 
 public class PdfUtils {
-    private static Logger logger = Logger.getLogger(PdfUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(PdfUtils.class);
 
     public static int getPdfPage(byte[] bytes, String fileUrl){
         int pages = 0;

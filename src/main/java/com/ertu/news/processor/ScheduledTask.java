@@ -7,8 +7,9 @@ import com.ertu.news.model.bean.Site;
 import com.ertu.news.model.bean.SiteBean;
 import com.ertu.news.utils.PropertyUtils;
 import com.ertu.news.utils.TimeUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ import java.util.Map;
 public class ScheduledTask extends Thread {
 
     static boolean isNormal = true;
-    private static Logger logger = Logger.getLogger(ScheduledTask.class);
+    private static Logger logger = LoggerFactory.getLogger(ScheduledTask.class);
     private Connection connection = null;
 
 
@@ -33,7 +34,7 @@ public class ScheduledTask extends Thread {
         List<Site> sourceConfigList = new ArrayList<>();
         //获取指定路径下的所有配置文件
         String xmlRootDir = PropertyUtils.getPathByName(PropertyUtils.CONFIG_PATH_PROP);
-        MDC.put("site_id", 1);
+        MDC.put("site_id", 1 +"");
         logger.info("the spider gets the config path :" + xmlRootDir);
         while (isNormal) {
             XmlAnalysis.traverseConfigByDir(xmlRootDir, sourceConfigList);
@@ -53,11 +54,11 @@ public class ScheduledTask extends Thread {
                     e.printStackTrace();
                 }
                 //设置日志中的特殊字段
-                MDC.put("site_id", siteBean.getSiteId());
+                MDC.put("site_id", siteBean.getSiteId() +"");
                 if (site.getConfigBean().getGeneralConfig().isEnabled()) {
                     //把栏目信息插入到website表
                     ConfigBean configBean = site.getConfigBean();
-                    MDC.put("site_id", siteBean.getSiteId());
+                    MDC.put("site_id", siteBean.getSiteId() + "");
                     try {
                         JdbcOperate.createTable(websiteDbMap, connection);
                     } catch (Exception e) {

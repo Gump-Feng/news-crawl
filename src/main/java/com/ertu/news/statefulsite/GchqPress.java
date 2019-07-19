@@ -2,11 +2,11 @@ package com.ertu.news.statefulsite;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.lwlh.download.utils.HttpClientUtils;
-import com.lwlh.io.sql.JdbcOperate;
-import com.lwlh.model.FieldEnum;
-import com.lwlh.utils.JdbcUtil;
-import com.lwlh.utils.TimeUtils;
+import com.ertu.news.download.utils.HttpClientUtils;
+import com.ertu.news.io.sql.JdbcOperate;
+import com.ertu.news.model.FieldEnum;
+import com.ertu.news.utils.JdbcUtil;
+import com.ertu.news.utils.TimeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

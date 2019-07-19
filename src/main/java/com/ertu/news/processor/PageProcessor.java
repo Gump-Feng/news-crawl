@@ -5,8 +5,9 @@ import com.ertu.news.download.DownLoader;
 import com.ertu.news.model.bean.ConfigBean;
 import com.ertu.news.model.bean.Site;
 import com.ertu.news.model.bean.SiteBean;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
@@ -17,7 +18,7 @@ import java.util.concurrent.BlockingQueue;
  */
 public class PageProcessor implements SpiderProcessor {
     private int threadCount;
-    private Logger logger = Logger.getLogger(PageProcessor.class);
+    private Logger logger = LoggerFactory.getLogger(PageProcessor.class);
 
     public PageProcessor(int threadCount) {
         this.threadCount = threadCount;
@@ -36,12 +37,12 @@ public class PageProcessor implements SpiderProcessor {
             while (ScheduledTask.isNormal) {
                 Site site = TaskManager.getListPageTask();
                 if (site != null) {
-                    MDC.put("site_id", 5);
+                    MDC.put("site_id", 5 + "");
                     ConfigBean configBean = site.getConfigBean();
                     SiteBean siteBean = configBean.getSiteBean();
                     logger.info("列表页线程获得栏目：" + siteBean.getWebsiteNameEn() + "--" + siteBean.getWebsiteColumnNameEn());
                     int siteId = siteBean.getSiteId();
-                    MDC.put("site_id", siteId);
+                    MDC.put("site_id", siteId + "");
                     logger.info("开始解析网站：" + siteBean.getWebsiteNameEn() + "--" + configBean.getXmlPath());
                     Set<String> duplicatedUrls = site.getDuplicatedUrls();
                     BlockingQueue<String> pageUrls = site.getListUrlQueue();

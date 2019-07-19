@@ -15,8 +15,9 @@ import com.ertu.news.utils.PdfUtils;
 import com.ertu.news.utils.StringUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +35,7 @@ import java.util.concurrent.BlockingQueue;
  */
 public class NewsProcessor implements SpiderProcessor {
     private int threadCount;
-    private Logger logger = Logger.getLogger(PageProcessor.class);
+    private Logger logger = LoggerFactory.getLogger(PageProcessor.class);
 
     public NewsProcessor(int threadCount) {
         this.threadCount = threadCount;
@@ -55,7 +56,6 @@ public class NewsProcessor implements SpiderProcessor {
 
         @Override
         public void run() {
-            long startTime = System.currentTimeMillis();
             String threadName = Thread.currentThread().getName();
             while (ScheduledTask.isNormal) {
                 //记录一下出队列的网站顺序
@@ -64,12 +64,12 @@ public class NewsProcessor implements SpiderProcessor {
                 ProcessManager.checkIn(threadName, site, new Date());
 
                 if (site != null) {
-                    MDC.put("site_id", 6);
+                    MDC.put("site_id", 6 + "");
                     ConfigBean configBean = site.getConfigBean();
                     SiteBean siteBean = configBean.getSiteBean();
                     logger.info("详情页线程获得栏目：" + siteBean.getWebsiteNameEn() + "--" + siteBean.getWebsiteColumnNameEn());
                     int siteId = siteBean.getSiteId();
-                    MDC.put("site_id", siteId);
+                    MDC.put("site_id", siteId + "");
                     // 获取代理
                     HttpHost host = LocalProxy.getHttpHost();
                     BlockingQueue<PageBean> infoUrls = site.getDetailUrlQueue();

@@ -9,9 +9,9 @@ import com.ertu.news.model.bean.Site;
 import com.ertu.news.model.bean.SiteBean;
 import com.ertu.news.utils.MailUtils;
 import org.apache.http.HttpHost;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ import java.util.Map;
  * @date 2019/4/26 15:15
  */
 public class ConfigProcessor implements SpiderProcessor {
-    private Logger logger = Logger.getLogger(ConfigProcessor.class);
+    private Logger logger = LoggerFactory.getLogger(ConfigProcessor.class);
     private int threadCount;
 
     private boolean isNormal = true;
@@ -52,7 +52,7 @@ public class ConfigProcessor implements SpiderProcessor {
                     ConfigBean configBean = site.getConfigBean();
                     SiteBean siteBean = configBean.getSiteBean();
                     int siteId = siteBean.getSiteId();
-                    MDC.put("site_id", siteId);
+                    MDC.put("site_id", siteId+"");
                     Map<String, Object> websiteDbMap = siteBean.getDbTableConfig().get(XmlAnalysis.WEBSITE_TABLE_TAG);
                     if (connection == null) {
                         connection = JdbcOperate.getSqlConn(websiteDbMap);
@@ -126,7 +126,7 @@ public class ConfigProcessor implements SpiderProcessor {
                                 e.printStackTrace();
                             }
                         }
-                        MDC.put("site_id", 4);
+                        MDC.put("site_id", 4 + "");
                         TaskManager.addDetailPageTask(site);
                         logger.info("详情页队列已添加栏目：" + siteBean.getWebsiteNameEn() + "(" + siteBean.getWebsiteColumnNameEn() + ")");
                         TaskManager.addListPageTask(site);

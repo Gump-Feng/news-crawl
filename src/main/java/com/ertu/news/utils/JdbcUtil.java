@@ -1,8 +1,9 @@
 package com.ertu.news.utils;
 
 import com.ertu.news.model.FieldEnum;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import java.sql.*;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @date 2019/7/5 10:46
  */
 public class JdbcUtil {
-    private static Logger logger = Logger.getLogger(JdbcUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(JdbcUtil.class);
 
     public static Connection getConnection() {
         Connection conn = null;

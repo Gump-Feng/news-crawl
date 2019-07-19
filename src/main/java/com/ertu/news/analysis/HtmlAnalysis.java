@@ -1,17 +1,17 @@
 package com.ertu.news.analysis;
 
-
 import com.ertu.news.io.sql.JdbcOperate;
 import com.ertu.news.model.bean.*;
 import com.ertu.news.utils.StringUtils;
 import com.ertu.news.utils.TimeUtils;
 import com.github.binarywang.java.emoji.EmojiConverter;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
 import org.dom4j.Element;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
@@ -26,7 +26,7 @@ import java.util.concurrent.BlockingQueue;
  * 对xml解析到的规则在相关页面中进行获取信息
  */
 public class HtmlAnalysis implements Analysis {
-    private static Logger logger = Logger.getLogger(HtmlAnalysis.class);
+    private static Logger logger = LoggerFactory.getLogger(HtmlAnalysis.class);
 
     public static void main(String[] args) {
         String preUrl = "";
@@ -446,7 +446,7 @@ public class HtmlAnalysis implements Analysis {
     public static void classifyUrl(byte[] bytes, Site site) {
         Rule rule = site.getConfigBean().getSiteBean().getRule();
         List<String> extractLocationList = rule.getExtractLocation();
-        MDC.put("site_id", site.getConfigBean().getSiteBean().getSiteId());
+        MDC.put("site_id", site.getConfigBean().getSiteBean().getSiteId()+"");
         if (bytes != null) {
             Html html = null;
             try {

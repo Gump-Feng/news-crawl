@@ -8,9 +8,10 @@ import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
@@ -27,7 +28,7 @@ import java.util.concurrent.BlockingQueue;
  * https://www.pppl.gov/news/archive/feed
  */
 public class RssAnalysis implements Analysis {
-    private static Logger logger = Logger.getLogger(RssAnalysis.class);
+    private static Logger logger = LoggerFactory.getLogger(RssAnalysis.class);
 
 
     public static void main(String[] args) {

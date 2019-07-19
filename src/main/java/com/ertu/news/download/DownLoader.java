@@ -1,8 +1,8 @@
 package com.ertu.news.download;
 
-import com.lwlh.download.utils.GetHeaders;
-import com.lwlh.download.utils.HttpClientUtils;
-import com.lwlh.model.bean.ProxyBean;
+import com.ertu.news.download.utils.GetHeaders;
+import com.ertu.news.download.utils.HttpClientUtils;
+import com.ertu.news.model.bean.ProxyBean;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -12,7 +12,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ import java.io.IOException;
  */
 public class DownLoader {
 
-    private static Logger logger = Logger.getLogger(DownLoader.class);
+    private static Logger logger = LoggerFactory.getLogger(DownLoader.class);
     /**
      * 不使用代理的请求
      *

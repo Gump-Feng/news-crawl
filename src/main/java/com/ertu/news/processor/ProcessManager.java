@@ -1,8 +1,9 @@
 package com.ertu.news.processor;
 
 import com.ertu.news.model.bean.Site;
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -19,13 +20,13 @@ import java.util.Map;
 public class ProcessManager extends Thread {
 
     private static Map<String, Map<String, Object>> monitorMap = new HashMap<>();
-    private Logger logger = Logger.getLogger(ProcessManager.class);
+    private Logger logger = LoggerFactory.getLogger(ProcessManager.class);
 
     @Override
     public void run() {
         Map<String, Map<String, Object>> oldMonitorMap = new HashMap<>(32);
         while (true) {
-            MDC.put("site_id", 10);
+            MDC.put("site_id", 10 + "");
             ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
             int activeCount = threadGroup.activeCount();
             Thread[] threads = new Thread[activeCount];

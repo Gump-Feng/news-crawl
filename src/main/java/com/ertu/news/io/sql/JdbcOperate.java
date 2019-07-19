@@ -242,30 +242,6 @@ public class JdbcOperate {
         }
     }
 
-    /*public static void closeStatRes(Connection con, Statement stat, ResultSet rs) {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        if (stat != null) {
-            try {
-                stat.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }*/
 
     @SuppressWarnings("unchecked")
     public static void createTable(Map<String, Object> dataBaseMap, Connection con) {

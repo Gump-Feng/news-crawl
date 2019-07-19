@@ -117,7 +117,8 @@ public class NewsProcessor implements SpiderProcessor {
                     logger.info("结束抓取网站：" + siteBean.getWebsiteNameEn() + "(" + siteBean.getWebsiteColumnNameEn() + ")" + "的详情页");
                 } else {
                     try {
-                        sleep(1000 * 60 * 3);
+//                        sleep(1000 * 60 * 3);
+                        sleep(1000 * 3);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
